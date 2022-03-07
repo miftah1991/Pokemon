@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose --coverage",
     "watch": "webpack --watch",
     "start": "webpack serve --open",
     "build": "webpack"
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/miftah1991/Pokemon#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.8",
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.7.0",
     "eslint": "^7.32.0",
