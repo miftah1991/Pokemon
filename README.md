@@ -1,14 +1,16 @@
-# Pok-mon
-
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
 # Pokemon-api
 
 > Building a pokemon rating App
 
-![screenshot](https://github.com/miftah1991/Pokemon/blob/develop/src/assets/Screen.png)
+
 
 Pokemon API is a web application based on external APIs. We selected an API that provides data about pokes and then build the webapp for it. The webapp has two interfaces the home page showing a list of items that you can like, and the popup window with more data about an item that you can use to comment on.
+
+
+![screenshot](https://github.com/miftah1991/Pokemon/blob/develop/src/assets/Screen.png)
+
 
 ## Built With
 
