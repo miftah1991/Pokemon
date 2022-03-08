@@ -3,19 +3,24 @@ import { createPokeType } from './renderPokeType.js';
 import { fetchPokemons } from './pokeDetail.js';
 import { postLikes } from './manageLikes.js';
 import { likeCountes } from './getCounts.js';
+import { openPopup } from './openPopup.js';
 
 const render = (data) => {
   data.forEach(async (pokeData) => {
     const mydata = await fetchPokemons(pokeData.url);
     const allPokemonContainer = document.getElementById('pokemon-container');
+
     const pokeContainer = document.createElement('div');
     pokeContainer.classList.add('card');
+
     createImg(mydata.id, pokeContainer);
+
     const pokeDetails = document.createElement('div');
     pokeDetails.classList.add('poke-details');
 
     const pokeName = document.createElement('h4');
     pokeName.innerText = pokeData.name;
+
     const pokeNumber = document.createElement('p');
     pokeNumber.innerText = `#${mydata.id}`;
 
@@ -28,12 +33,19 @@ const render = (data) => {
 
     const likeCounter = document.createElement('p');
     likeCounter.classList.add('like-counter');
+
     likeCountes(mydata.id, likeCounter);
+
     const pokeTypes = document.createElement('ul');
+
     const commentBtn = document.createElement('button');
     commentBtn.classList.add('comment-btn');
-    commentBtn.setAttribute('id', `comment${mydata.id}`);
+    commentBtn.setAttribute('id', `${mydata.id}`);
     commentBtn.innerHTML = 'Comments';
+    commentBtn.addEventListener('click', () => {
+      openPopup(`${mydata.id}`);
+    });
+
     createPokeType(mydata.types, pokeTypes);
 
     likePokemon.append(likeIcon, likeCounter);
