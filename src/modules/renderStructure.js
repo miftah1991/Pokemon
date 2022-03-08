@@ -1,14 +1,12 @@
-// import { updateLikes } from './getLikes.js';
 import { createImg } from './renderPokeImage.js';
 import { createPokeType } from './renderPokeType.js';
-import { fetchPokemonsssss } from './pokeDetail.js';
+import { fetchPokemons } from './pokeDetail.js';
 import { postLikes } from './manageLikes.js';
 import { likeCountes } from './getCounts.js';
 
 const render = (data) => {
   data.forEach(async (pokeData) => {
-    // console.log(pokeData);
-    const mydata = await fetchPokemonsssss(pokeData.url);
+    const mydata = await fetchPokemons(pokeData.url);
     const allPokemonContainer = document.getElementById('pokemon-container');
     const pokeContainer = document.createElement('div');
     pokeContainer.classList.add('card');
@@ -31,10 +29,7 @@ const render = (data) => {
     const likeCounter = document.createElement('p');
     likeCounter.classList.add('like-counter');
     likeCountes(mydata.id, likeCounter);
-    // const likes = await updateLikes(mydata.id);
-    // likeCounter.innerHTML = likes+' likes';
     const pokeTypes = document.createElement('ul');
-
     const commentBtn = document.createElement('button');
     commentBtn.classList.add('comment-btn');
     commentBtn.setAttribute('id', `comment${mydata.id}`);
@@ -53,7 +48,4 @@ const render = (data) => {
     });
   });
 };
-
-// createPokeImage(pokeData.id, pokeContainer);
-
 export default render;

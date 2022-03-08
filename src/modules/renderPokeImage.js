@@ -9,6 +9,4 @@ export const createImg = async (pokeID, containerDiv) => {
 
   pokeImgContainer.append(pokeImage);
   containerDiv.append(pokeImgContainer);
-
-  // return pokeImgContainer;
 };
