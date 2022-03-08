@@ -4,6 +4,7 @@
 import { likeCountes } from './getCounts.js';
 import { createImg } from './renderPokeImage.js';
 import { createPokeType } from './renderPokeType.js';
+import { postComment, getComments } from './managePosts.js';
 
 export function openPopup(id) {
   function fetchPokemonsPopup(id) {
@@ -13,6 +14,25 @@ export function openPopup(id) {
         renderPkmnPopup(pokemonInfo);
       });
   }
+
+  const displayComments = async (id, commentDiv) => {
+    const pokemonComments = await getComments(id);
+    pokemonComments.forEach((comment) => {
+      const comDiv = document.createElement('div');
+      comDiv.classList.add('single-comment');
+      const user = document.createElement('p');
+      user.innerHTML = `${comment.username}: `;
+      const userCom = document.createElement('p');
+      userCom.innerHTML = comment.comment;
+      comDiv.append(user, userCom);
+      commentDiv.append(comDiv);
+    });
+  };
+
+  const removeComments = () => {
+    const comsDiv = document.getElementById('all-comments');
+    comsDiv.innerHTML = '';
+  };
 
   function renderPkmnPopup(pokemonInfo) {
     const PopupPokemonContainer = document.getElementById('container');
@@ -61,9 +81,7 @@ export function openPopup(id) {
     const commentsdiv = document.createElement('div');
     commentsdiv.classList.add('comments-div');
     commentsdiv.innerHTML = `
-        <div class="comments">
-        <h5>Francisco:</h5>
-        <p>This is awesome</p>
+        <div id="all-comments" class="comments">
         </div>
         <form id="comment-form">
             <div class="form-group">
@@ -72,7 +90,7 @@ export function openPopup(id) {
             </div>
             <div class="form-group">
                 <label for="comment"></label>
-                <textarea class="user-comment" id="comment" rows="10" cols="79" placeholder="Type your comment here" required/></textarea>
+                <textarea class="user-comment" id="comment" rows="10" placeholder="Type your comment here" required/></textarea>
             </div>
             <input id="submit-btn" class="button" type="submit" value="Post Comment">
         </form>
@@ -83,6 +101,22 @@ export function openPopup(id) {
     popupDetails.append(pokeDetails, pokeTypes);
     pokePopup.append(popupDetails, commentsdiv, closeCommentBtn);
     PopupPokemonContainer.append(pokePopup);
+
+    const postBtn = document.getElementById('submit-btn');
+    const input = document.getElementById('name');
+    const comment = document.getElementById('comment');
+    postBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const allCommentDiv = document.getElementById('all-comments');
+      postComment(pokemonInfo.id, input.value, comment.value);
+      removeComments();
+      setTimeout(() => {
+        displayComments(pokemonInfo.id, allCommentDiv);
+      }, 500);
+    });
+
+    const commentDiv = document.getElementById('all-comments');
+    displayComments(id, commentDiv);
   }
 
   fetchPokemonsPopup(id);
