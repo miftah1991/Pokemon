@@ -1,13 +1,16 @@
-import _ from 'lodash';
 import './style.css';
+import { displayCounts } from './modules/getCounts.js';
+import render from './modules/renderStructure.js';
+import fetchPokemons from './modules/apiCall.js';
+import pokeCounter from './modules/itemCounter.js';
+// window.addEventListener('load', () => {
+//   displayCards();
+// });
 
-function component() {
-  const element = document.createElement('div');
-
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-  return element;
-}
-
-document.body.appendChild(component());
+const starter = async () => {
+  const data = await fetchPokemons();
+  await render(data.results);
+  const pokes = pokeCounter(data.results);
+  displayCounts(pokes);
+};
+starter();
