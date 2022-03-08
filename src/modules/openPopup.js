@@ -2,6 +2,8 @@
 /* eslint-disable no-use-before-define */
 
 import { likeCountes } from './getCounts.js';
+import { createImg } from './renderPokeImage.js';
+import { createPokeType } from './renderPokeType.js';
 
 export function openPopup(id) {
   function fetchPokemonsPopup(id) {
@@ -10,25 +12,6 @@ export function openPopup(id) {
       .then((pokemonInfo) => {
         renderPkmnPopup(pokemonInfo);
       });
-  }
-
-  function createTypes(types, ul) {
-    types.forEach((type) => {
-      const typeLi = document.createElement('li');
-      typeLi.innerText = type.type.name;
-      ul.append(typeLi);
-    });
-  }
-
-  function createPopupImage(pokeID, containerDiv) {
-    const pokeImgContainer = document.createElement('div');
-    pokeImgContainer.classList.add('popup-image');
-
-    const pokeImage = document.createElement('img');
-    pokeImage.srcset = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeID}.png`;
-
-    pokeImgContainer.append(pokeImage);
-    containerDiv.append(pokeImgContainer);
   }
 
   function renderPkmnPopup(pokemonInfo) {
@@ -43,7 +26,7 @@ export function openPopup(id) {
     const pokeDetails = document.createElement('div');
     pokeDetails.classList.add('popup-poke-details');
 
-    createPopupImage(pokemonInfo.id, pokeDetails);
+    createImg(pokemonInfo.id, pokeDetails);
 
     const closeCommentBtn = document.createElement('button');
     closeCommentBtn.classList.add('close-comment-btn');
@@ -73,7 +56,7 @@ export function openPopup(id) {
 
     const pokeTypes = document.createElement('ul');
 
-    createTypes(pokemonInfo.types, pokeTypes);
+    createPokeType(pokemonInfo.types, pokeTypes);
 
     const commentsdiv = document.createElement('div');
     commentsdiv.classList.add('comments-div');
