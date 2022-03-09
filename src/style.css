@@ -55,8 +55,14 @@ footer {
   flex-direction: column;
 }
 
+.image {
+  background-color: rgb(243, 243, 243)
+}
+
 .image img {
   width: 100%;
+  max-width: 400px;
+  max-height: 400px;
   background-color: rgb(243, 243, 243);
 }
 
@@ -198,8 +204,18 @@ form {
   height: 45%;
 }
 
+form p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.counter-div {
+  display: flex;
+}
+
+
 .form-group {
-  padding: 0.3rem 0;
+  padding: 0.1rem 0;
   font-size: 1.5rem;
 }
 
