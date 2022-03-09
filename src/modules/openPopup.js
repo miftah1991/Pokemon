@@ -17,22 +17,25 @@ export function openPopup(id) {
 
   const displayComments = async (id, commentDiv) => {
     const pokemonComments = await getComments(id);
-    pokemonComments.forEach((comment) => {
-      const comDiv = document.createElement('div');
-      comDiv.classList.add('single-comment');
-      const user = document.createElement('p');
-      user.innerHTML = `${comment.username}: `;
-      const userCom = document.createElement('p');
-      userCom.innerHTML = comment.comment;
-      comDiv.append(user, userCom);
-      commentDiv.append(comDiv);
-    });
+    if (pokemonComments?.error?.status !== 400) {
+      pokemonComments.forEach((comment) => {
+        const comDiv = document.createElement('div');
+        comDiv.classList.add('single-comment');
+        const user = document.createElement('p');
+        user.innerHTML = `${comment.username}: `;
+        const userCom = document.createElement('p');
+        userCom.innerHTML = comment.comment;
+        comDiv.append(user, userCom);
+        commentDiv.append(comDiv);
+      });
+    }
+    
   };
 
   const countComments = async (id, counterP) => {
     const pokemonComments = await getComments(id);
     const commentsCounter = pokemonComments.length;
-    counterP.innerHTML = commentsCounter;
+    pokemonComments.length >0 ? counterP.innerHTML = commentsCounter :0;
   };
 
   const removeComments = () => {
@@ -117,12 +120,14 @@ export function openPopup(id) {
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const allCommentDiv = document.getElementById('all-comments');
-      postComment(pokemonInfo.id, input.value, comment.value);
-      removeComments();
-      setTimeout(() => {
-        displayComments(pokemonInfo.id, allCommentDiv);
-        countComments(pokemonInfo.id, counterP);
-      }, 500);
+      if(input !="" && comment !=""){
+        postComment(pokemonInfo.id, input.value, comment.value);
+        removeComments();
+        setTimeout(() => {
+          displayComments(pokemonInfo.id, allCommentDiv);
+          countComments(pokemonInfo.id, counterP);
+        }, 500);
+      }
     });
     const counterP = document.getElementById('comments-counter');
     const commentDiv = document.getElementById('all-comments');
