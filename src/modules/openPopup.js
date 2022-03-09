@@ -29,13 +29,16 @@ export function openPopup(id) {
         commentDiv.append(comDiv);
       });
     }
-    
   };
 
   const countComments = async (id, counterP) => {
     const pokemonComments = await getComments(id);
     const commentsCounter = pokemonComments.length;
-    pokemonComments.length >0 ? counterP.innerHTML = commentsCounter :0;
+    if (commentsCounter > 0) {
+      counterP.innerHTML = commentsCounter;
+    } else {
+      counterP.innerHTML = '0';
+    }
   };
 
   const removeComments = () => {
@@ -120,7 +123,7 @@ export function openPopup(id) {
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const allCommentDiv = document.getElementById('all-comments');
-      if(input !="" && comment !=""){
+      if (input !== '' && comment !== '') {
         postComment(pokemonInfo.id, input.value, comment.value);
         removeComments();
         setTimeout(() => {
