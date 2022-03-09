@@ -143,14 +143,28 @@ button:hover {
 }
 
 .popup-details {
-  width: 40%;
+  width: 30%;
   background-color: #ef5350;
   box-shadow: 1rem 0 1rem 0 #333;
   z-index: 2;
 }
 
+.popup-details p {
+  font-size: 1.3rem;
+}
+
+.popup-details h4 {
+  font-size: 1.3rem;
+}
+
+.popup-details .like-pokemon {
+  display: flex;
+  flex-direction: row;
+}
+
 .popup-poke-details {
   width: 100%;
+  height: 75%;
   text-align: center;
 }
 
@@ -169,14 +183,14 @@ button:hover {
   color: #000;
   font-weight: bold;
   list-style: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: 1rem;
   background-color: #fff;
   border: #ffcb05 solid 5px;
 }
 
 .comments-div {
-  width: 53%;
+  width: 56%;
   background-color: #ef5350;
   padding: 2rem;
 }
@@ -184,7 +198,7 @@ button:hover {
 .comments {
   color: #000;
   width: 100%;
-  height: 55%;
+  height: 45%;
   border: #333 solid 1px;
   background-color: rgba(255, 255, 255, 0.63);
   overflow-y: auto;
