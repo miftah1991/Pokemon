@@ -26,7 +26,7 @@ Pokemon API is a web application based on external APIs. We selected an API that
 
 ## Video Link
 
-[Project video Link]()
+[Project video Link](https://drive.google.com/file/d/1dDga9987mQqNYiGIf98cJu9zYiRJseof/view)
 
 ## Getting Started
 
