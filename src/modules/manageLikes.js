@@ -9,6 +9,10 @@ export const postLikes = async (id) => {
   });
   return response;
 };
+export const addElement = (e) => {
+  const currentNumber = e.innerText;
+  e.innerText = `${parseInt(currentNumber, 10) + 1} likes`;
+};
 export const getLikes = async () => {
   const likesData = await fetch(url);
   const allLikes = await likesData.json();

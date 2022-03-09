@@ -1,7 +1,7 @@
 import { createImg } from './renderPokeImage.js';
 import { createPokeType } from './renderPokeType.js';
 import { fetchPokemons } from './pokeDetail.js';
-import { postLikes } from './manageLikes.js';
+import { postLikes, addElement } from './manageLikes.js';
 import { likeCountes } from './getCounts.js';
 import { openPopup } from './openPopup.js';
 
@@ -56,7 +56,8 @@ const render = (data) => {
     const likeBtn = document.getElementById(`like${mydata.id}`);
     likeBtn.addEventListener('click', () => {
       postLikes(mydata.id);
-      likeCountes(mydata.id, likeCounter);
+      addElement(likeCounter);
+      // likeCountes(mydata.id, likeCounter);
     });
   });
 };
