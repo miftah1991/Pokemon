@@ -29,6 +29,12 @@ export function openPopup(id) {
     });
   };
 
+  const countComments = async (id, counterP) => {
+    const pokemonComments = await getComments(id);
+    const commentsCounter = pokemonComments.length;
+    counterP.innerHTML = commentsCounter;
+  };
+
   const removeComments = () => {
     const comsDiv = document.getElementById('all-comments');
     comsDiv.innerHTML = '';
@@ -84,6 +90,9 @@ export function openPopup(id) {
         <div id="all-comments" class="comments">
         </div>
         <form id="comment-form">
+            <div class="counter-div">
+              <p>Comments: </p><p id="comments-counter"></p>
+            </div>
             <div class="form-group">
                 <label for="name">Your Name</label>
                 <input class="user-name" type="text" id="name" placeholder="Your Name" required>
@@ -112,11 +121,13 @@ export function openPopup(id) {
       removeComments();
       setTimeout(() => {
         displayComments(pokemonInfo.id, allCommentDiv);
+        countComments(pokemonInfo.id, counterP);
       }, 500);
     });
-
+    const counterP = document.getElementById('comments-counter');
     const commentDiv = document.getElementById('all-comments');
     displayComments(id, commentDiv);
+    countComments(id, counterP);
   }
 
   fetchPokemonsPopup(id);
